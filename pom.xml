@@ -58,7 +58,6 @@
       <version>2.1.1</version>
     </dependency>
 
-    <!--支持SpringMVC文件上传功能-->
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
@@ -66,14 +65,12 @@
     </dependency>
 
 
-    <!--Hibernate 4.3.8.Final-->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>4.3.8.Final</version>
     </dependency>
 
-    <!-- FastJson 1.2.24 -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>

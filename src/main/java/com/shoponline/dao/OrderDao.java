@@ -6,19 +6,17 @@ import java.util.List;
 
 
 public interface OrderDao {
-    public Order getOrder(int userId, int productId, String time);
+    Order getOrder(int userId, int productId, String time);
 
-    public void addOrder(Order order);
+    void addOrder(Order order);
 
-    public boolean deleteOrder(int userId,int productId);
+    boolean deleteOrder(int userId,int productId);
 
-    public boolean updateOrder(Order order);
+    boolean updateOrder(Order order);
 
-    public List<Order> getOrders(int userId);
+    List<Order> getUserOrders(int userId);
 
-    public List<Order> getAllOrders();
+    List<Order> getAllOrders();
 
-    public List<Order> getOrdersByOrderStatus(int orderStatus);
-
-    public boolean getUserProductOrder(int userId,int productId);
+    boolean getUserProductOrder(int userId,int productId);
 }

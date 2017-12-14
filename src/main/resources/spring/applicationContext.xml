@@ -18,7 +18,8 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-	<!-- 引入数据库资源文件 -->
+	<aop:aspectj-autoproxy/>
+
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:properties/database.properties" />
 	</bean>
@@ -27,19 +28,16 @@
 		  class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${driverClassName}"></property>
 		<property name="url" value="${url}"></property>
-		<property name="username" value="${userName}"></property>
+		<property name="username" value="${username}"></property>
 		<property name="password" value="${password}"></property>
 	</bean>
-
-	<!-- AOP -->
-	<aop:aspectj-autoproxy/>
 
 	<bean id="sessionFactory"
 		  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>

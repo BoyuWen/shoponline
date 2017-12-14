@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -19,15 +18,17 @@ public class UserController {
     @Resource
     UserService userService;
 
-
     @RequestMapping(value = "/register")
     public String register() {
         return "register";
     }
 
-    @RequestMapping(value = "/amend_info")
-    public String amend_info() {
-        return "amend_info";
+    @RequestMapping(value = "/updata")
+    public String updata(HttpSession session) {
+        if (session.getAttribute("nowUser") == null){
+            return "login";
+        }
+        return "updata";
     }
 
     @RequestMapping(value = "/login")
@@ -41,22 +42,27 @@ public class UserController {
     }
 
     @RequestMapping(value = "/control")
-    public String control() {
-        return "control";
+    public String control(HttpSession session) {
+        User nowuser = (User)session.getAttribute("nowUser");
+        if (nowuser != null){
+            if (nowuser.getRole() == 1){
+                return "control";
+            }
+        }
+        return "main";
     }
 
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> doLogin(String UsernameOrEmail, String password, HttpSession httpSession) {
-        System.out.println("我接收到了登录请求" + UsernameOrEmail + " " + password);
+    public Map<String, Object> doLogin(String usernameOrEmail, String password, HttpSession Session) {
         String result;
-        User user = userService.getUser(UsernameOrEmail);
+        User user = userService.getUser(usernameOrEmail);
         if (user == null)
             result = "unexist";
         else {
             if (user.getPassword().equals(password)) {
                 result = "success";
-                httpSession.setAttribute("currentUser", user);
+                Session.setAttribute("nowUser", user);
             } else
                 result = "wrong";
         }
@@ -68,7 +74,6 @@ public class UserController {
     @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> doRegister(String username, String password, String email, String phone, String address) {
-
         String result;
         User user = userService.getUser(username);
         if (user != null) {
@@ -85,7 +90,7 @@ public class UserController {
                 user1.setPhone(phone);
                 user1.setAddress(address);
                 user1.setRole(0);
-                userService.addUser(user);
+                userService.addUser(user1);
                 result = "success";
             }
         }
@@ -101,7 +106,7 @@ public class UserController {
         User user = userService.getUser(username);
         user.setUsername(username);
         user.setPassword(password);
-        user.setPassword(email);
+        user.setEmail(email);
         user.setPhone(phone);
         user.setAddress(address);
         userService.updateUser(user);
@@ -136,9 +141,9 @@ public class UserController {
         return resultMap;
     }
 
-    @RequestMapping(value = "/getUserAddressAndPhone", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAddressAndPhone", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> getUserAddressAndPhone(int id) {
+    public Map<String, Object> getAddressAndPhone(int id) {
         String address = userService.getUser(id).getAddress();
         String phone = userService.getUser(id).getPhone();
         Map<String,Object> resultMap = new HashMap();
@@ -149,7 +154,7 @@ public class UserController {
 
     @RequestMapping(value = "/doLogout")
     public String doLogout(HttpSession httpSession){
-        httpSession.setAttribute("currentUser","");
+        httpSession.setAttribute("nowUser","");
         return "redirect:login";
     }
 

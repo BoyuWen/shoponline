@@ -20,12 +20,8 @@
 	<mvc:resources location="/static/css/" mapping="/css/**"/>
     <mvc:resources location="/static/js/" mapping="/js/**"/>
     <mvc:resources location="/static/img/" mapping="/img/**"/>
-    
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="5242880" />
-	</bean>
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
 
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="cacheSeconds" value="0"/>
@@ -37,6 +33,10 @@
 		</property>
 		<property name="webBindingInitializer" ref="webBindingInitializer">
 		</property>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5242880" />
 	</bean>
 
 	<bean id="mappingStringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">

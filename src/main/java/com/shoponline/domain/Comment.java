@@ -3,9 +3,9 @@ package com.shoponline.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="price")
+@Table(name="comment")
 @IdClass(value=OrderPrimary.class)
-public class Price {
+public class Comment {
     private int userId;
     private int productId;
     private String time;

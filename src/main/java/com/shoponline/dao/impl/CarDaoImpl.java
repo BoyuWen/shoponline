@@ -40,9 +40,9 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public boolean updateCar(Car car) {
-        String hql = "update Car set productPrice=?,counts=? where userId=? and productId=?";
+        String hql = "update Car set money=?,counts=? where userId=? and productId=?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        query.setParameter(0, car.getProductPrice());
+        query.setParameter(0, car.getMoney());
         query.setParameter(1, car.getCounts());
         query.setParameter(2, car.getUserId());
         query.setParameter(3, car.getProductId());

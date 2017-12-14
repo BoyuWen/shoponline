@@ -21,35 +21,30 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void addOrder(Order order) {
         orderDao.addOrder(order);
-    }
+    } //添加订单
 
     @Override
     public boolean deleteOrder(int userId, int productId) {
         return orderDao.deleteOrder(userId,productId);
-    }
+    } //删除订单
 
     @Override
     public boolean updateOrder(Order order) {
         return orderDao.updateOrder(order);
-    }
+    } //更新订单信息
 
     @Override
-    public List<Order> getOrdersByOrderStatus(int orderStatus) {
-        return orderDao.getOrdersByOrderStatus(orderStatus);
-    }
-
-    @Override
-    public List<Order> getOrders(int userId) {
-        return orderDao.getOrders(userId);
+    public List<Order> getUserOrders(int userId) { //获得用户全部订单
+        return orderDao.getUserOrders(userId);
     }
 
     @Override
     public List<Order> getAllOrders() {
         return orderDao.getAllOrders();
-    }
+    } //获得网站全部订单
 
     @Override
-    public boolean getUserProductOrder(int userId,int productId) {
+    public boolean getUserProductOrder(int userId,int productId) { //根据用户和产品ID查找订单
         return orderDao.getUserProductOrder(userId,productId);
     }
 }

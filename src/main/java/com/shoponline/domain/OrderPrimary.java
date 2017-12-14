@@ -33,16 +33,15 @@ public class OrderPrimary implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrderPrimary)) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof OrderPrimary)) return false;
 
-        OrderPrimary that = (OrderPrimary) o;
+        OrderPrimary that = (OrderPrimary) object;
 
         if (getUserId() != that.getUserId()) return false;
         if (getProductId() != that.getProductId()) return false;
         return getTime().equals(that.getTime());
-
     }
 
     @Override

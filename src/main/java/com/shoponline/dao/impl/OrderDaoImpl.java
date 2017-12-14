@@ -41,14 +41,14 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean updateOrder(Order order) {
-        String hql = "update ShoponlineReocrd set orderStatus=? where userId=? and productId=? and time=?";
-        String sql = "update record set order_status="+ order.getOrderStatus()+" where user_id="+ order.getUserId()+" and product_id="+ order.getProductId()+" and time='"+ order.getTime()+"'";
+//        String hql = "update Orders set orderStatus=? where userId=? and productId=? and time=?";
+        String sql = "update orders set order_status="+ order.getOrderStatus()+" where user_id="+ order.getUserId()+" and product_id="+ order.getProductId()+" and time='"+ order.getTime()+"'";
         Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
         return query.executeUpdate() > 0;
     }
 
     @Override
-    public List<Order> getOrders(int userId) {
+    public List<Order> getUserOrders(int userId) {
         String hql = "from Order where userId=?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setParameter(0,userId);
@@ -59,14 +59,6 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getAllOrders() {
         String hql = "from Order";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        return query.list();
-    }
-
-    @Override
-    public List<Order> getOrdersByOrderStatus(int orderStatus) {
-        String hql = "from Order where orderStatus=?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        query.setParameter(0,orderStatus);
         return query.list();
     }
 

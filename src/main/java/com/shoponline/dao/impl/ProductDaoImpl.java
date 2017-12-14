@@ -64,7 +64,6 @@ public class ProductDaoImpl implements ProductDao {
         for(int i=0;i<searchKeyWord.length();i++){
             queryKeyWord += String.valueOf(searchKeyWord.charAt(i)) +"%";
         }
-        System.out.println("我搜索了"+queryKeyWord);
         String hql = "from Product where name like ? or key_word like ?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setParameter(0,queryKeyWord);

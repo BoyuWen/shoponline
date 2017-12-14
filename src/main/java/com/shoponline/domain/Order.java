@@ -2,16 +2,15 @@ package com.shoponline.domain;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name="record")
+@Table(name="orders")
 @IdClass(value=OrderPrimary.class)
 public class Order {
     private int userId;
     private int productId;
     private String time;
     private int orderStatus;
-    private int productPrice;
+    private int money;
     private int counts;
 
     @Id
@@ -53,13 +52,13 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    @Column(name="product_price")
-    public int getProductPrice() {
-        return productPrice;
+    @Column(name="money")
+    public int getMoney() {
+        return money;
     }
 
-    public void setProductPrice(int productPrice) {
-        this.productPrice = productPrice;
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     @Column(name="counts")
